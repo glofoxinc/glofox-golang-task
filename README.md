@@ -69,6 +69,7 @@ The task above is the floor, not the ceiling. As you work, we'll be paying atten
 - **Correctness under contention.** What happens when two members try to book the last seat at the same instant?
 - **Where the rules live.** Is "this booking is valid" enforced in the handler, the service, or the storage layer? Why?
 - **Persistence boundaries.** Whichever storage path you pick, how hard would it be to swap to the other? Where does your domain end and storage begin?
+- **How you test.** You won't have time to test everything. Pick one test that you think matters — and we'll ask why you picked it.
 - **Trade-offs you can defend.** We'd rather see a simple solution you can justify than a clever one you can't.
 
 You don't need to solve all of these upfront. We'll explore some of them together once the basic endpoints are working.
@@ -85,11 +86,11 @@ Requires **Go 1.22+**.
 
 ```bash
 make run         # starts the server on :8080
-make test        # runs the smoke test (it FAILS until /classes is implemented)
+make test        # runs your tests once you write them
 make test-race   # runs tests with the race detector
 ```
 
-The repo ships with a single failing black-box test in [`api_test.go`](api_test.go) that POSTs to `/classes` and expects `201 Created`. Make it pass first; that's the warm-up.
+No tests ship in this repo — write the ones you think matter.
 
 ## Layout
 
@@ -100,7 +101,6 @@ The repo ships with a single failing black-box test in [`api_test.go`](api_test.
 │   └── storage/
 │       ├── memory/              # empty — fill in if you take the in-memory path
 │       └── sqlite/              # Open(path) helper + schema.sql, if you take the SQL path
-├── api_test.go                  # one failing smoke test
 ├── go.mod                       # stdlib + modernc.org/sqlite (pure-Go, no CGO)
 └── Makefile
 ```
