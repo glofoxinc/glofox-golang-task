@@ -10,31 +10,25 @@ Glofox is a SaaS platform for boutiques, studios, and gyms. Studio owners create
 
 ## Your task
 
-Build a small HTTP API with two endpoints.
+Build a small HTTP API with one endpoint.
 
-### `POST /classes` — create a class
+### Pre-seeded class
 
-A studio owner creates a class with a date range and a per-day capacity.
+A Pilates class is already loaded into the store when the server starts — you don't need to create it. Its details are:
 
-```http
-POST /classes
-Content-Type: application/json
+| Field | Value |
+|-------|-------|
+| `id` | `5d2e2a9f-3c1b-4f2a-b6e0-1a2b3c4d5e6f` |
+| `name` | `Pilates` |
+| `start_date` | `2026-12-01` |
+| `end_date` | `2026-12-20` |
+| `capacity` | `10` (per day) |
 
-{
-  "name": "Pilates",
-  "start_date": "2026-12-01",
-  "end_date":   "2026-12-20",
-  "capacity":   10
-}
-```
+The class covers 20 daily instances (`2026-12-01` through `2026-12-20`), each with a maximum of 10 attendees. The ID is also printed to stdout when you run the server.
 
-A class with `start_date = 2026-12-01`, `end_date = 2026-12-20`, `capacity = 10` means there are 20 daily class instances, each with a maximum of 10 attendees.
+### `POST /bookings` — book a member onto the class
 
-Respond with an appropriate success status and an identifier the client can refer to later.
-
-### `POST /bookings` — book a member onto a class
-
-A member books a specific date of an existing class.
+A member books a specific date of the pre-seeded class.
 
 ```http
 POST /bookings
@@ -42,7 +36,7 @@ Content-Type: application/json
 
 {
   "member_name": "Alice",
-  "class_id":    "<id from POST /classes>",
+  "class_id":    "5d2e2a9f-3c1b-4f2a-b6e0-1a2b3c4d5e6f",
   "date":        "2026-12-14"
 }
 ```
@@ -59,7 +53,7 @@ The task above is the floor, not the ceiling. As you work, we'll be paying atten
 
 - **Correctness under contention.** What happens when two members try to book the last seat at the same instant?
 - **Where the rules live.** Is "this booking is valid" enforced in the handler, the service, or the storage layer? Why?
-- **Persistence boundaries.** Whichever storage path you pick, how hard would it be to swap to the other? Where does your domain end and storage begin?
+- **Persistence boundaries.** Where does your domain end and storage begin? How hard would it be to swap in a SQL-backed store later?
 - **How you test.** You won't have time to test everything. Pick one test that you think matters — and we'll ask why you picked it.
 - **Trade-offs you can defend.** We'd rather see a simple solution you can justify than a clever one you can't.
 
@@ -87,7 +81,7 @@ No tests ship in this repo — write the ones you think matter.
 
 ```text
 .
-├── cmd/api/main.go              # boots an http.Server on :8080 with no routes
+├── cmd/api/main.go              # boots an http.Server on :8080; holds the seed class data
 ├── internal/
 │   └── storage/
 │       └── memory/              # empty — fill in your in-memory storage here
@@ -95,7 +89,7 @@ No tests ship in this repo — write the ones you think matter.
 └── Makefile
 ```
 
-The two `storage/` subpackages are deliberately empty (or near-empty). We'd like to see how you'd organise the domain, service, and HTTP layers around them.
+The `storage/memory` package is deliberately empty. We'd like to see how you'd organise the domain, service, and HTTP layers around it.
 
 The skeleton uses the Go standard library only. You're welcome to reach for `chi`, `gin`, `echo`, or anything else — we'll ask why.
 

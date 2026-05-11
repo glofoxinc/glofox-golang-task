@@ -15,20 +15,41 @@ import (
 	"time"
 )
 
+// SeedClass holds the data for the class that is pre-loaded into the store at
+// startup. Candidates do not need to create a class — they just book against
+// this one. Seed it into your store before registering routes.
+var SeedClass = struct {
+	ID        string
+	Name      string
+	StartDate string
+	EndDate   string
+	Capacity  int
+}{
+	ID:        "5d2e2a9f-3c1b-4f2a-b6e0-1a2b3c4d5e6f",
+	Name:      "Pilates",
+	StartDate: "2026-12-01",
+	EndDate:   "2026-12-20",
+	Capacity:  10,
+}
+
 func main() {
 	addr := ":8080"
 	if v := os.Getenv("ADDR"); v != "" {
 		addr = v
 	}
 
+	// TODO: initialise your store and seed SeedClass into it here.
+
 	mux := http.NewServeMux()
 
 	// TODO: register your routes here.
 	//
-	//   POST /classes  -> create a class
-	//   POST /bookings -> book a member onto a class for a specific date
+	//   POST /bookings -> book a member onto a pre-seeded class for a specific date
 	//
 	// See README.md for the full task brief.
+
+	log.Printf("seeded class id=%s name=%q dates=%s..%s capacity=%d",
+		SeedClass.ID, SeedClass.Name, SeedClass.StartDate, SeedClass.EndDate, SeedClass.Capacity)
 
 	srv := &http.Server{
 		Addr:              addr,
