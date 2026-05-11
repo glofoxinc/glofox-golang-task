@@ -49,18 +49,9 @@ Content-Type: application/json
 
 Respond with an appropriate success status. Think about what should happen when the inputs don't make sense — both shape-wise and meaning-wise.
 
-## Storage — pick a path
+## Storage
 
-Two options, neither is the "right" one. Pick whichever you'd rather defend.
-
-- **In-memory.** Zero setup. Fast to write. Good for showing you can model the domain cleanly and reason about concurrency in Go.
-- **SQLite.** Equally zero-setup — a pure-Go driver is already wired in, and a `schema.sql` is provided. Good for showing how you draw boundaries between the domain and persistence.
-
-If you take the SQLite path, [`internal/storage/sqlite/db.go`](internal/storage/sqlite/db.go) gives you `Open(path string) (*sql.DB, error)` — it opens a SQLite file (use `":memory:"` for tests) and applies the schema. Everything else (queries, types, transactions) is up to you.
-
-If you take the in-memory path, [`internal/storage/memory/`](internal/storage/memory/) is the empty package waiting for it. Delete the `sqlite/` directory if you don't want it.
-
-We're equally happy with either. We're more interested in *why* you chose what you chose.
+Use **in-memory** storage. [`internal/storage/memory/`](internal/storage/memory/) is the empty package waiting for it.
 
 ## What we value
 
@@ -99,15 +90,14 @@ No tests ship in this repo — write the ones you think matter.
 ├── cmd/api/main.go              # boots an http.Server on :8080 with no routes
 ├── internal/
 │   └── storage/
-│       ├── memory/              # empty — fill in if you take the in-memory path
-│       └── sqlite/              # Open(path) helper + schema.sql, if you take the SQL path
-├── go.mod                       # stdlib + modernc.org/sqlite (pure-Go, no CGO)
+│       └── memory/              # empty — fill in your in-memory storage here
+├── go.mod                       # stdlib only
 └── Makefile
 ```
 
 The two `storage/` subpackages are deliberately empty (or near-empty). We'd like to see how you'd organise the domain, service, and HTTP layers around them.
 
-The skeleton uses the Go standard library plus a pure-Go SQLite driver. You're welcome to reach for `chi`, `gin`, `echo`, or anything else — we'll ask why.
+The skeleton uses the Go standard library only. You're welcome to reach for `chi`, `gin`, `echo`, or anything else — we'll ask why.
 
 ## Submitting
 
