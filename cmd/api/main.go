@@ -39,6 +39,8 @@ func main() {
 	}
 
 	// TODO: initialise your store and seed SeedClass into it here.
+	log.Printf("seeded class id=%s name=%q dates=%s..%s capacity=%d",
+		SeedClass.ID, SeedClass.Name, SeedClass.StartDate, SeedClass.EndDate, SeedClass.Capacity)
 
 	mux := http.NewServeMux()
 
@@ -47,9 +49,6 @@ func main() {
 	//   POST /bookings -> book a member onto a pre-seeded class for a specific date
 	//
 	// See README.md for the full task brief.
-
-	log.Printf("seeded class id=%s name=%q dates=%s..%s capacity=%d",
-		SeedClass.ID, SeedClass.Name, SeedClass.StartDate, SeedClass.EndDate, SeedClass.Capacity)
 
 	srv := &http.Server{
 		Addr:              addr,

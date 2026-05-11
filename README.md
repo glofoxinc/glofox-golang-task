@@ -57,7 +57,7 @@ The task above is the floor, not the ceiling. As you work, we'll be paying atten
 - **How you test.** You won't have time to test everything. Pick one test that you think matters — and we'll ask why you picked it.
 - **Trade-offs you can defend.** We'd rather see a simple solution you can justify than a clever one you can't.
 
-You don't need to solve all of these upfront. We'll explore some of them together once the basic endpoints are working.
+You don't need to solve all of these upfront. We'll explore some of them together once the basic endpoint is working.
 
 ## A note on AI tools
 
