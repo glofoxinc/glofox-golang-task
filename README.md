@@ -18,13 +18,13 @@ A Pilates class is already loaded into the store when the server starts — you 
 
 | Field | Value |
 |-------|-------|
-| `id` | `5d2e2a9f-3c1b-4f2a-b6e0-1a2b3c4d5e6f` |
-| `name` | `Pilates` |
-| `start_date` | `2026-12-01` |
-| `end_date` | `2026-12-20` |
-| `capacity` | `10` (per day) |
+| `id`          | `5d2e2a9f-3c1b-4f2a-b6e0-1a2b3c4d5e6f` |
+| `name`        | `Pilates`                              |
+| `start_date` | `2026-12-14`                           |
+| `end_date`   | `2026-12-14`                           |
+| `capacity`    | `10`                                   |
 
-The class covers 20 daily instances (`2026-12-01` through `2026-12-20`), each with a maximum of 10 attendees. The ID is also printed to stdout when you run the server.
+The class is a single instance on `2026-12-14` with a maximum of 10 attendees. The ID is also printed to stdout when you run the server.
 
 ### `POST /bookings` — book a member onto the class
 
