@@ -67,7 +67,7 @@ If you'd rather not use AI, that's also completely fine.
 
 ## Running the skeleton
 
-Requires **Go 1.22+**.
+Requires **Go 1.23+**.
 
 ```bash
 make run         # starts the server on :8080
