@@ -27,8 +27,8 @@ var SeedClass = struct {
 }{
 	ID:        "5d2e2a9f-3c1b-4f2a-b6e0-1a2b3c4d5e6f",
 	Name:      "Pilates",
-	StartDate: "2026-12-01",
-	EndDate:   "2026-12-20",
+	StartDate: "2026-12-14",
+	EndDate:   "2026-12-14",
 	Capacity:  10,
 }
 
