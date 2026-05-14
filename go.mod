@@ -1,3 +1,3 @@
 module github.com/glofoxinc/glofox-golang-task
 
-go 1.22
+go 1.23
