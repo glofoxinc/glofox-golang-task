@@ -67,7 +67,7 @@ If you'd rather not use AI, that's also completely fine.
 
 ## Running the skeleton
 
-Requires **Go 1.22+**.
+Requires **Go 1.22+**. On macOS 15 (Sequoia) and newer, use **Go 1.23+** — older Go releases produce binaries without an `LC_UUID` load command and fail to launch under the newer `dyld` with `signal: abort trap`.
 
 ```bash
 make run         # starts the server on :8080
